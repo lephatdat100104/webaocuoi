@@ -1,0 +1,83 @@
+﻿@model WebCUOI.Models.AoCuoi // Đảm bảo đúng namespace của bạn
+
+@{
+    ViewData["Title"] = "Chi Tiết Áo Cưới";
+}
+
+<h1>Chi Tiết Áo Cưới</h1>
+
+<div>
+    <h4>Áo Cưới</h4>
+    <hr />
+    @if (!string.IsNullOrEmpty(Model.HinhAnhURL)) // <<< THÊM KHỐI CODE NÀY ĐỂ HIỂN THỊ ẢNH
+    {
+        <img src="@Model.HinhAnhURL" alt="@Model.TenAoCuoi" style="max-width: 300px; height: auto; margin-bottom: 20px;" />
+    }
+    <hr />
+    <h4>Thêm vào Giỏ Hàng</h4>
+    <form asp-controller="GioHang" asp-action="AddToCart" method="post">
+        <input type="hidden" name="productId" value="@Model.ID" />
+        <input type="hidden" name="productType" value="AoCuoi" />
+        <input type="hidden" name="kichCo" value="@Model.KichCo" /> @* Có thể cho người dùng chọn kích cỡ nếu có nhiều *@
+
+        <div class="mb-3">
+            <label for="ngayBatDauThue" class="form-label">Ngày Thuê:</label>
+            <input type="date" name="ngayBatDauThue" id="ngayBatDauThue" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="ngayKetThucThue" class="form-label">Ngày Trả:</label>
+            <input type="date" name="ngayKetThucThue" id="ngayKetThucThue" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm vào Giỏ Hàng</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại danh sách</a>
+    </form>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TenAoCuoi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenAoCuoi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaThue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GiaThue)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KichCo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KichCo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HinhAnhURL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HinhAnhURL)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayNhapKho)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayNhapKho)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ID">Sửa</a> |
+    <a asp-action="Index">Quay lại danh sách</a>
+</div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebCUOI.Models.DichVuCuoiHoi>
+
+@{
+    ViewData["Title"] = "Dịch Vụ Cưới Hỏi";
+}
+
+<h2 class="mb-3">Danh sách dịch vụ</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">+ Thêm dịch vụ</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Thời lượng</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.HinhAnhURL))
+                    {
+                        <img src="@item.HinhAnhURL" width="100" />
+                    }
+                </td>
+                <td>@item.TenDichVu</td>
+                <td>@item.GiaDichVu.ToString("N0") đ</td>
+                <td>@item.ThoiLuong</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

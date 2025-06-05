@@ -1,0 +1,12 @@
+﻿@model WebCUOI.Models.DichVuCuoiHoi
+
+<h2>Xóa dịch vụ</h2>
+
+<div>
+    <p>Bạn có chắc chắn muốn xóa dịch vụ <strong>@Model.TenDichVu</strong> không?</p>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

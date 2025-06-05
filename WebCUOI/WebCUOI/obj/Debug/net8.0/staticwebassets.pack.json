@@ -1,0 +1,337 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebCUOI.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebCUOI.kpwrpnzv3p.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\ao-cuoi-ren-pha-le.jpg",
+      "PackagePath": "staticwebassets\\images\\ao-cuoi-ren-pha-le.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\ao-dai-cuoi-truyen-thong.jpg",
+      "PackagePath": "staticwebassets\\images\\ao-dai-cuoi-truyen-thong.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi1.jpg",
+      "PackagePath": "staticwebassets\\images\\aocuoi1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi3.jpg",
+      "PackagePath": "staticwebassets\\images\\aocuoi3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi4.webp",
+      "PackagePath": "staticwebassets\\images\\aocuoi4.webp"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi5.webp",
+      "PackagePath": "staticwebassets\\images\\aocuoi5.webp"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi6.webp",
+      "PackagePath": "staticwebassets\\images\\aocuoi6.webp"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi7.jpg",
+      "PackagePath": "staticwebassets\\images\\aocuoi7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi8.jpg",
+      "PackagePath": "staticwebassets\\images\\aocuoi8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\aocuoi9.jpg",
+      "PackagePath": "staticwebassets\\images\\aocuoi9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\dichvu2.jpg",
+      "PackagePath": "staticwebassets\\images\\dichvu2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\dichvu3.jpg",
+      "PackagePath": "staticwebassets\\images\\dichvu3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\dichvu4.jpg",
+      "PackagePath": "staticwebassets\\images\\dichvu4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\vay-cuoi-ball-gown.jpg",
+      "PackagePath": "staticwebassets\\images\\vay-cuoi-ball-gown.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\vay-cuoi-duoi-ca.jpg",
+      "PackagePath": "staticwebassets\\images\\vay-cuoi-duoi-ca.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\images\\vay-cuoi-satin-don-gian.jpg",
+      "PackagePath": "staticwebassets\\images\\vay-cuoi-satin-don-gian.jpg"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\admin\\Downloads\\WebCUOI (1)\\WebCUOI\\WebCUOI\\wwwroot\\uploads\\d4094891-505f-4daa-a0c6-92116afd06a0_dichvu2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\d4094891-505f-4daa-a0c6-92116afd06a0_dichvu2.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebCUOI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebCUOI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebCUOI.props",
+      "PackagePath": "build\\WebCUOI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebCUOI.props",
+      "PackagePath": "buildMultiTargeting\\WebCUOI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebCUOI.props",
+      "PackagePath": "buildTransitive\\WebCUOI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

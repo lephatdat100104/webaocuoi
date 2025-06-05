@@ -1,0 +1,75 @@
+﻿@model List<WebCUOI.Models.GioHangItem>
+
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+    decimal tongTien = Model.Sum(item => item.Price * item.Quantity);
+}
+
+<h2>Giỏ Hàng</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (!Model.Any())
+{
+    <p>Giỏ hàng đang trống.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Loại</th>
+                <th>Ngày thuê</th>
+                <th>Kích cỡ</th>
+                <th>Giá</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageURL))
+                        {
+                            <img src="@item.ImageURL" width="100" />
+                        }
+                    </td>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductType</td>
+                    <td>
+                        @{
+                            var start = item.NgayBatDauThue?.ToString("dd/MM/yyyy") ?? "-";
+                            var end = item.NgayKetThucThue?.ToString("dd/MM/yyyy") ?? "-";
+                        }
+                        @start - @end
+                    </td>
+                    <td>@item.KichCo</td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="id" value="@item.ID" />
+                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-end">
+        <h4>Tổng tiền: <strong>@tongTien.ToString("N0") đ</strong></h4>
+        <form asp-action="Checkout" method="post">
+            <button class="btn btn-success">Thanh toán</button>
+        </form>
+    </div>
+}

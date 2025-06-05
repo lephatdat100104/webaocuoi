@@ -1,0 +1,15 @@
+﻿@model WebCUOI.Models.DichVuCuoiHoi
+
+<h2>Chi tiết dịch vụ</h2>
+
+<div>
+    <img src="@Model.HinhAnhURL" width="300" />
+    <p><strong>Tên:</strong> @Model.TenDichVu</p>
+    <p><strong>Mô tả:</strong> @Model.MoTa</p>
+    <p><strong>Giá:</strong> @Model.GiaDichVu.ToString("N0") đ</p>
+    <p><strong>Thời lượng:</strong> @Model.ThoiLuong</p>
+    <p><strong>Khác dụng:</strong> @Model.KhacDung</p>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Sửa</a>
+<a asp-action="Index" class="btn btn-secondary">Trở về</a>

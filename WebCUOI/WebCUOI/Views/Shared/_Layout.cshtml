@@ -1,0 +1,158 @@
+﻿@* Views/Shared/_Layout.cshtml *@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - WebCUOI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;400;700&display=swap" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebCUOI.styles.css" asp-append-version="true" />
+
+    <style>
+        /* Background hình nền mờ nhẹ */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            padding-top: 70px; /* Để không bị menu che */
+        }
+
+            /* Overlay mờ tối để chữ nổi bật */
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 240, 245, 0.75); /* màu hồng nhạt mờ */
+                z-index: -1;
+                backdrop-filter: blur(4px);
+            }
+
+        .navbar-brand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #ad1457 !important; /* tím hồng đậm */
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .navbar {
+            box-shadow: 0 3px 15px rgba(173, 20, 87, 0.4);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            transition: background-color 0.3s ease;
+        }
+
+            .navbar:hover {
+                background-color: rgba(255, 255, 255, 1) !important;
+            }
+
+        .nav-link {
+            color: #6a1b4d !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover, .nav-link:focus {
+                color: #c2185b !important;
+                text-decoration: underline;
+            }
+
+        footer {
+            background-color: #fce4ec;
+            padding: 15px 0;
+            font-size: 0.9rem;
+            color: #880e4f;
+            font-weight: 500;
+        }
+
+        a.btn-custom {
+            background-color: #ad1457;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+            a.btn-custom:hover {
+                background-color: #880e4f;
+                color: white;
+                text-decoration: none;
+            }
+
+        /* Scrollbar custom nhẹ nhàng */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fce4ec;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #ad1457;
+            border-radius: 4px;
+        }
+
+        /* Container chính - làm nền trắng mờ cho nội dung dễ đọc */
+        .container.mt-4 {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(173, 20, 87, 0.15);
+            min-height: 80vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCUOI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Trang Chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="AoCuoi" asp-action="Index">Áo Cưới</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="DichVuCuoiHoi" asp-action="Index">Dịch Vụ Cưới Hỏi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">Giới Thiệu</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-4">
+        <main role="main" class="pb-4">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-center border-top text-muted mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; @DateTime.Now.Year - WebCUOI | <a asp-controller="Home" asp-action="Privacy">Chính Sách Bảo Mật</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
