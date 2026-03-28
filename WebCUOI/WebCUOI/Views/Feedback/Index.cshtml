@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebCUOI.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Quản lý phản hồi";
+}
+
+<h2 class="page-header text-center mb-4">Quản lý phản hồi khách hàng</h2>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-light">
+        <tr>
+            <th width="15%">Người gửi</th>
+            <th width="35%">Nội dung</th>
+            <th width="25%">Phản hồi của admin</th>
+            <th width="25%">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>
+                        <div>@item.Message</div>
+                        <small class="text-muted">
+                            Gửi lúc: @item.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                        </small>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Reply))
+                        {
+                            <div>@item.Reply</div>
+                            <small class="text-muted">
+                                Trả lời lúc: @item.RepliedAt?.ToString("dd/MM/yyyy HH:mm")
+                            </small>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Chưa có phản hồi</span>
+                        }
+                    </td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Reply))
+                        {
+                            <form method="post" asp-action="Reply" class="d-flex">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <input type="text" name="reply"
+                                       class="form-control form-control-sm me-2"
+                                       placeholder="Nhập phản hồi..." required />
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Gửi
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Đã trả lời</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center text-muted">
+                    Chưa có phản hồi nào.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebCUOI.Models.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Quản Lý Người Dùng";
+}
+
+<h1 class="text-center fw-bold text-dark my-4">Quản Lý Người Dùng</h1>
+
+<div class="mb-3">
+    <a asp-action="Register" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Thêm Người Dùng Mới
+    </a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Email</th>
+            <th>Tên đăng nhập</th>
+            <th>Vai trò</th>
+            <th class="text-center">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>
+                    @if (user.Roles.Any())
+                    {
+                        foreach (var role in user.Roles)
+                        {
+                            <span class="badge bg-info text-dark">@role</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">Chưa có vai trò</span>
+                    }
+                </td>
+                <td class="text-center">
+                    <a asp-action="SuaNguoiDung" asp-route-id="@user.Id" class="btn btn-warning btn-sm me-1">
+                        <i class="bi bi-pencil-square"></i> Sửa
+                    </a>
+                    <a asp-action="XoaNguoiDung" asp-route-id="@user.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xoá người dùng này?');">
+                        <i class="bi bi-trash"></i> Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

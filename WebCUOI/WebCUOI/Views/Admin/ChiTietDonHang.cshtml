@@ -1,0 +1,134 @@
+﻿@model WebCUOI.Models.DonHang
+
+@{
+    ViewData["Title"] = "Chi Tiết Đơn Hàng";
+}
+
+<h2 class="text-center mb-4" style="color: #007bff;">
+    <i class="fas fa-info-circle"></i> Chi Tiết Đơn Hàng
+</h2>
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5>Thông tin đơn hàng</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Mã Đơn Hàng:</strong> @Model.ID</p>
+        <p><strong>Khách Hàng:</strong> @Model.KhachHang?.Email</p>
+        <p><strong>Ngày Đặt:</strong> @Model.NgayDat.ToString("dd/MM/yyyy HH:mm:ss")</p>
+        <p><strong>Tổng Tiền:</strong> @Model.TongTien.ToString("N0") VNĐ</p>
+        <p><strong>Trạng Thái:</strong> @(Model.TrangThai ?? "Đang chờ xử lý")</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-success text-white">
+        <h5>Chi tiết sản phẩm/dịch vụ trong đơn hàng</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.ChiTietDonHangs != null && Model.ChiTietDonHangs.Any())
+        {
+            <table class="table table-bordered text-center table-striped">
+                <thead class="table-info">
+                    <tr>
+                        <th>#</th>
+                        <th>Tên Sản Phẩm / Dịch Vụ</th>
+                        <th>Loại</th>
+                        <th>Kích Cỡ</th>
+                        <th>Ngày Bắt Đầu Thuê</th>
+                        <th>Ngày Kết Thúc Thuê</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Giá</th>
+                        <th>Thành Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int itemIndex = 0; // Khởi tạo biến đếm
+                    }
+                    @foreach (var item in Model.ChiTietDonHangs)
+                    {
+                        itemIndex++; // Tăng biến đếm cho mỗi dòng
+                        <tr>
+                            <td>@itemIndex</td> @* Sử dụng biến đếm thay vì IndexOf() *@
+                            <td>
+                                @if (item.AoCuoi != null)
+                                {
+                                    <span>@item.AoCuoi.TenAoCuoi</span>
+                                }
+                                else if (item.DichVuCuoiHoi != null)
+                                {
+                                    <span>@item.DichVuCuoiHoi.TenDichVu</span>
+                                }
+                                else if (!string.IsNullOrEmpty(item.TenSanPham)) @* Kiểm tra thuộc tính TenSanPham trực tiếp trong ChiTietDonHang *@
+                                {
+                                    <span>@item.TenSanPham</span>
+                                }
+                                else
+                                {
+                                    <span>Không xác định</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.AoCuoi != null)
+                                {
+                                    <span>Áo Cưới</span>
+                                }
+                                else if (item.DichVuCuoiHoi != null)
+                                {
+                                    <span>Dịch Vụ</span>
+                                }
+                                else if (!string.IsNullOrEmpty(item.LoaiSanPham)) @* Kiểm tra thuộc tính LoaiSanPham trực tiếp trong ChiTietDonHang *@
+                                {
+                                    <span>@item.LoaiSanPham</span>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
+                            <td>@(item.KichCo ?? "N/A")</td> @* Kích cỡ lấy trực tiếp từ ChiTietDonHang *@
+                            <td>
+                                @if (item.NgayBatDauThue.HasValue)
+                                {
+                                    <span>@item.NgayBatDauThue.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.NgayKetThucThue.HasValue)
+                                {
+                                    <span>@item.NgayKetThucThue.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.Gia.ToString("N0") VNĐ</td> @* Lấy giá trực tiếp từ ChiTietDonHang *@
+                            <td>@((item.SoLuong * item.Gia).ToString("N0")) VNĐ</td> @* Tính thành tiền từ thuộc tính Gia của ChiTietDonHang *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="alert alert-warning text-center">Không có sản phẩm nào trong đơn hàng.</p>
+        }
+    </div>
+</div>
+
+<div class="mt-4 text-center">
+    <a asp-action="QuanLyDonHang" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

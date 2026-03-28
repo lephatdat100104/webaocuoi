@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebCUOI.Models.Notification>
+
+<ul class="list-group list-group-flush">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <li class="list-group-item @(item.IsRead ? "" : "fw-bold")">
+                <i class="bi bi-bell-fill text-warning me-2"></i> @item.Content
+                <br />
+                <small class="text-muted">
+                    @item.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                </small>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item text-center text-muted">
+            Không có thông báo mới.
+        </li>
+    }
+</ul>

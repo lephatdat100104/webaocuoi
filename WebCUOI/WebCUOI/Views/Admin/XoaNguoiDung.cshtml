@@ -1,0 +1,21 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+@{
+    ViewData["Title"] = "Xóa Người Dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-danger mb-4">Xác Nhận Xóa Người Dùng</h2>
+
+<div class="alert alert-warning">
+    <strong>Bạn có chắc chắn muốn xóa người dùng sau không?</strong><br />
+    <b>Email:</b> @Model.Email<br />
+    <b>Tên đăng nhập:</b> @Model.UserName
+</div>
+
+<form asp-action="XacNhanXoaNguoiDung" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="text-end">
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="QuanLyNguoiDung" class="btn btn-secondary">Hủy</a>
+    </div>
+</form>

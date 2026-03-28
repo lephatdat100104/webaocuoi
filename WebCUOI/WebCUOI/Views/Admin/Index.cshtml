@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Trang Quản Trị Admin";
+}
+
+<h1 class="text-center mb-4">Trang Quản Trị Hệ Thống</h1>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary"><i class="bi bi-person-fill-gear me-2"></i>Quản Lý Người Dùng</h5>
+                <p class="card-text">Xem, khóa và mở khóa tài khoản người dùng.</p>
+                <a asp-action="QuanLyNguoiDung" class="btn btn-outline-primary">Đi đến</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title text-success"><i class="bi bi-person-hearts me-2"></i>Quản Lý Áo Cưới</h5>
+                <p class="card-text">Thêm, sửa, xóa và quản lý danh sách áo cưới.</p>
+                <a asp-action="QuanLyAoCuoi" class="btn btn-outline-success">Đi đến</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title text-info"><i class="bi bi-flower1 me-2"></i>Quản Lý Dịch Vụ Cưới Hỏi</h5>
+                <p class="card-text">Thêm, sửa, xóa và quản lý danh sách dịch vụ cưới hỏi.</p>
+                <a asp-action="QuanLyDichVu" class="btn btn-outline-info">Đi đến</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title text-warning"><i class="bi bi-bar-chart-line me-2"></i>Thống Kê & Báo Cáo</h5>
+                <p class="card-text">Xem các số liệu thống kê và báo cáo hệ thống.</p>
+                <a asp-controller="GioHang" asp-action="ThongKe" class="btn btn-outline-warning">Đi đến</a>
+            </div>
+        </div>
+    </div<div class="col-md-6 mb-3">
+    <div class="card shadow-sm h-100">
+        <div class="card-body">
+            <h5 class="card-title text-danger"><i class="bi bi-bag-check-fill me-2"></i>Quản Lý Đơn Hàng</h5>
+            <p class="card-text">Xem, cập nhật và xóa các đơn hàng của khách hàng.</p>
+            <a asp-action="QuanLyDonHang" class="btn btn-outline-danger">Đi đến</a>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+@section Scripts {
+    <script>
+        // Hiển thị thông báo thành công (nếu có)
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                alert(successMessage); // Hoặc dùng thư viện toastr/sweetalert2 để hiển thị đẹp hơn
+            }
+        });
+    </script>
+}

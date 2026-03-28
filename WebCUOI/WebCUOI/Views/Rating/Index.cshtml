@@ -1,0 +1,70 @@
+﻿@using WebCUOI.Models
+@model IEnumerable<Rating>
+
+@{
+    ViewData["Title"] = "Đánh giá dịch vụ";
+}
+
+<h2 class="page-header text-center mb-4">Đánh giá dịch vụ</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle text-center">
+        <thead class="table-light">
+            <tr>
+                <th width="10%">Dịch vụ</th>
+                <th width="20%">Người dùng</th>
+                <th width="20%">Điểm</th>
+                <th width="35%">Bình luận</th>
+                <th width="15%">Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ServiceId</td>
+
+                        <!-- Hiển thị tên người dùng -->
+                        <td>
+                            @if (item.User != null)
+                            {
+                                @item.User.UserName
+                            }
+                            else
+                            {
+                                <span class="text-muted">Khách vãng lai</span>
+                            }
+                        </td>
+
+                        <!-- Hiển thị điểm và sao -->
+                        <td>
+                            @if (item.Score > 0)
+                            {
+                                @for (int i = 0; i < item.Score; i++)
+                                {
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                }
+                            }
+                            else
+                            {
+                                <span class="text-muted">Chưa đánh giá</span>
+                            }
+                            <span class="text-muted ms-1">(@item.Score/5)</span>
+                        </td>
+
+                        <td>@item.Comment</td>
+                        <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-muted text-center">Chưa có đánh giá nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

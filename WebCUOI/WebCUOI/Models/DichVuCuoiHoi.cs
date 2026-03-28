@@ -23,7 +23,7 @@ namespace WebCUOI.Models
 
         [Display(Name = "Thời lượng")]
         [StringLength(100, ErrorMessage = "Thời lượng không được vượt quá 100 ký tự.")]
-        public string ThoiLuong { get; set; }
+        public string? ThoiLuong { get; set; }
 
         [Display(Name = "Tình trạng khả dụng")]
         public bool KhacDung { get; set; } = true;
@@ -31,6 +31,10 @@ namespace WebCUOI.Models
         // Thêm thuộc tính đường dẫn ảnh
         [Display(Name = "Ảnh dịch vụ")]
         [StringLength(500, ErrorMessage = "Đường dẫn ảnh không được vượt quá 500 ký tự.")]
-        public string HinhAnhURL { get; set; }
+        public string? HinhAnhURL { get; set; }
+        // ĐẢM BẢO CÓ CÁC THUỘC TÍNH NÀY:
+        public string? LoaiSanPham { get; set; } // Thuộc tính mới
+        public DateTime? NgayBatDauThue { get; set; } // Thuộc tính mới
+        public DateTime? NgayKetThucThue { get; set; } // Thuộc tính mới
     }
 }

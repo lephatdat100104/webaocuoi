@@ -1,0 +1,79 @@
+﻿@* Trong file Areas/Identity/Pages/Account/LichSuMuaHang.cshtml hoặc Views/GioHang/LichSuMuaHang.cshtml *@
+@model IEnumerable<WebCUOI.Models.DonHang>
+
+<h2>Lịch sử mua hàng</h2>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var donHang in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5>Đơn hàng #@donHang.ID - @donHang.NgayDat.ToString("dd/MM/yyyy")</h5>
+                <p>Tổng tiền: @donHang.TongTien.ToString("N0") VNĐ</p>
+                <p>Trạng thái: @donHang.TrangThai</p>
+            </div>
+            <div class="card-body">
+                <h6>Chi tiết đơn hàng:</h6>
+                @if (donHang.ChiTietDonHangs != null && donHang.ChiTietDonHangs.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Loại</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Kích cỡ</th>
+                                <th>Ngày thuê</th>
+                                <th>Ngày trả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var chiTiet in donHang.ChiTietDonHangs)
+                            {
+                                <tr>
+                                    <td>@chiTiet.TenSanPham</td>
+                                    <td>@chiTiet.LoaiSanPham</td>
+                                    <td>@chiTiet.Gia.ToString("N0") VNĐ</td>
+                                    <td>@chiTiet.SoLuong</td>
+                                    <td>@(chiTiet.KichCo ?? "N/A")</td>
+                                    <td>@(chiTiet.NgayBatDauThue?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                                    <td>
+                                        @if (chiTiet.NgayKetThucThue.HasValue && chiTiet.LoaiSanPham == "AoCuoi") // Chỉ hiển thị ngày trả nếu là áo cưới và có giá trị
+                                        {
+                                            @chiTiet.NgayKetThucThue.Value.ToString("dd/MM/yyyy")
+                                        }
+                                        else if (chiTiet.LoaiSanPham == "DichVuCuoiHoi")
+                                        {
+                                            <span>Không áp dụng</span>
+                                        }
+                                        else
+                                        {
+                                            <span></span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Không có chi tiết sản phẩm nào cho đơn hàng này.</p>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Bạn chưa có đơn hàng nào.</p>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}

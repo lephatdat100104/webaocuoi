@@ -1,22 +1,36 @@
-html {
-  font-size: 14px;
+﻿/* Trong file wwwroot/css/site.css của bạn */
+
+/* Các quy tắc chung cho thanh điều hướng */
+.navbar-nav .nav-link {
+    white-space: nowrap; /* Đảm bảo chữ không bị xuống dòng */
+    padding: 8px 15px; /* Điều chỉnh khoảng cách bên trong để tạo hình dáng nút */
+    margin: 0 5px; /* Tạo khoảng cách giữa các mục điều hướng */
+    border: 1px solid transparent; /* Viền trong suốt ban đầu để chuẩn bị cho hiệu ứng hover */
+    border-radius: 5px; /* Bo tròn các góc của "nút" */
+    transition: all 0.3s ease; /* Tạo hiệu ứng chuyển động mượt mà khi di chuột qua */
+    color: #333; /* Màu chữ mặc định cho các liên kết */
+    font-weight: 500; /* Làm cho chữ đậm hơn một chút (tùy chọn) */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    /* Hiệu ứng khi di chuột qua các liên kết điều hướng */
+    .navbar-nav .nav-link:hover {
+        border-color: #ff69b4; /* Viền màu hồng khi di chuột (Màu hồng nhạt) */
+        color: #ff69b4; /* Chữ màu hồng khi di chuột */
+        background-color: rgba(255, 105, 180, 0.1); /* Nền màu hồng nhạt trong suốt khi di chuột */
+        text-decoration: none; /* Đảm bảo không có gạch chân */
+        transform: translateY(-2px); /* Dịch chuyển nhẹ lên trên khi hover để tạo hiệu ứng nổi */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng nhẹ */
+    }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    /* Kiểu dáng cho các biểu tượng (icons) trong nav-link */
+    .navbar-nav .nav-link i {
+        margin-right: 5px; /* Khoảng cách giữa biểu tượng và chữ */
+    }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
+    /* Tùy chọn: Kiểu dáng cho liên kết đang hoạt động (trang hiện tại) */
+    .navbar-nav .nav-link.active {
+        border-color: #ff69b4; /* Viền màu hồng đậm */
+        background-color: #ff69b4; /* Nền màu hồng đậm */
+        color: white; /* Chữ màu trắng */
+        pointer-events: none; /* Vô hiệu hóa nhấp chuột trên mục active nếu muốn */
+    }

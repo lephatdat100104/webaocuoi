@@ -13,11 +13,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.Services; // Để sử dụng IEmailSender của Identity UI
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WebCUOI.Data;
+using WebCUOI.Models;
+using WebCUOI.Services; // Để sử dụng IEmailSender và EmailSender custom của bạn
 
 namespace WebCUOI.Areas.Identity.Pages.Account
 {
@@ -28,14 +31,16 @@ namespace WebCUOI.Areas.Identity.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly WebCUOI.Services.IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            WebCUOI.Services.IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,62 +48,49 @@ namespace WebCUOI.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email là bắt buộc.")]
+            [EmailAddress(ErrorMessage = "Email không hợp lệ.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Mật khẩu là bắt buộc.")]
+            [StringLength(100, ErrorMessage = "{0} phải có ít nhất {2} và tối đa {1} ký tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Xác nhận mật khẩu")]
+            [Compare("Password", ErrorMessage = "Mật khẩu và mật khẩu xác nhận không khớp.")]
             public string ConfirmPassword { get; set; }
-        }
 
+            [Required(ErrorMessage = "Tên khách hàng là bắt buộc.")]
+            [Display(Name = "Tên khách hàng")]
+            [StringLength(255, ErrorMessage = "{0} không được vượt quá {1} ký tự.")]
+            public string TenKhachHang { get; set; }
+
+            [Display(Name = "Địa chỉ")]
+            [StringLength(500, ErrorMessage = "{0} không được vượt quá {1} ký tự.")]
+            public string DiaChi { get; set; }
+
+            [Required(ErrorMessage = "Số điện thoại là bắt buộc.")]
+            [Phone(ErrorMessage = "Số điện thoại không hợp lệ.")]
+            [Display(Name = "Số điện thoại")]
+            [StringLength(15, ErrorMessage = "{0} không được vượt quá {1} ký tự.")]
+            public string SoDienThoai { get; set; }
+        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -110,6 +102,7 @@ namespace WebCUOI.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -120,7 +113,31 @@ namespace WebCUOI.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    // Gán vai trò "User" mặc định cho người dùng mới
+                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                    if (!roleResult.Succeeded)
+                    {
+                        _logger.LogError("Failed to add user {Email} to 'User' role: {Errors}", Input.Email, string.Join(", ", roleResult.Errors.Select(e => e.Description)));
+                        await _userManager.DeleteAsync(user); // Xóa người dùng nếu gán vai trò thất bại
+                        ModelState.AddModelError(string.Empty, "Đăng ký không thành công do lỗi gán vai trò. Vui lòng thử lại hoặc liên hệ quản trị viên.");
+                        return Page();
+                    }
+
+                    _logger.LogInformation("User created a new account with password and assigned 'User' role.");
+
+                    // Tạo bản ghi KhachHang mới
+                    var newKhachHang = new Models.KhachHang
+                    {
+                        Email = user.Email,
+                        TenKhachHang = Input.TenKhachHang,
+                        DiaChi = Input.DiaChi,
+                        SoDienThoai = Input.SoDienThoai,
+                         // <<< DÒNG ĐƯỢC THÊM VÀO ĐỂ GÁN USERID
+                         // <<< DÒNG ĐƯỢC THÊM VÀO ĐỂ GÁN USERID
+                    };
+                    _context.KhachHang.Add(newKhachHang);
+                    await _context.SaveChangesAsync(); // Lưu bản ghi KhachHang vào database
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -131,17 +148,18 @@ namespace WebCUOI.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Xác nhận địa chỉ email của bạn",
+                        $"Vui lòng xác nhận tài khoản của bạn bằng cách <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>nhấp vào đây</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
+                        TempData["SuccessMessage"] = "Đăng ký tài khoản thành công! Vui lòng kiểm tra email để xác nhận tài khoản của bạn.";
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        TempData["SuccessMessage"] = "Đăng ký tài khoản thành công! Vui lòng đăng nhập.";
+                        return RedirectToPage("./Login"); // Chuyển hướng về trang Login
                     }
                 }
                 foreach (var error in result.Errors)
@@ -150,7 +168,6 @@ namespace WebCUOI.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

@@ -1,0 +1,54 @@
+﻿@model WebCUOI.Models.DichVuCuoiHoi
+
+@{
+    ViewData["Title"] = "Tạo dịch vụ cưới hỏi";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="TenDichVu"></label>
+        <input asp-for="TenDichVu" class="form-control" />
+        <span asp-validation-for="TenDichVu" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MoTa"></label>
+        <textarea asp-for="MoTa" class="form-control"></textarea>
+        <span asp-validation-for="MoTa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GiaDichVu"></label>
+        <input asp-for="GiaDichVu" class="form-control" />
+        <span asp-validation-for="GiaDichVu" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ThoiLuong"></label>
+        <input asp-for="ThoiLuong" class="form-control" />
+        <span asp-validation-for="ThoiLuong" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="KhacDung" class="form-check-input" />
+        <label asp-for="KhacDung" class="form-check-label"></label>
+    </div>
+
+    <div class="form-group">
+        <label>Ảnh dịch vụ</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Tạo mới</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -2,65 +2,79 @@
     ViewData["Title"] = "Trang Chủ - WebCUOI";
 }
 
-<!-- Import Google Fonts Playfair Display -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
 <div class="special-intro text-center p-5 rounded shadow-lg position-relative overflow-hidden" style="background: linear-gradient(135deg, #f9e2e7 0%, #ffe9f1 100%);">
     <h1 class="display-3 fw-bold mb-3" style="font-family: 'Playfair Display', serif; color: #b33951; text-shadow: 2px 2px 6px rgba(0,0,0,0.1); animation: fadeInDown 1.2s ease forwards;">
-        WebCUOI - <span style="color: #e84393;">Nơi Tình Yêu Bắt Đầu</span>
+        WebCUOI - <span style="color: #e84393;">Nơi Tình Yêu Bốc Đầu</span>
     </h1>
     <p class="lead fs-4 mb-4" style="font-style: italic; color: #6c5ce7;">
         Biến giấc mơ ngày cưới của bạn thành hiện thực với bộ sưu tập áo cưới lộng lẫy và dịch vụ cưới hỏi chuyên nghiệp.
     </p>
     <hr class="my-4 mx-auto" style="width: 80px; border: 2px solid #e84393; border-radius: 5px;">
-    <p class="fs-5" style="color: #2d3436;">
-        Khám phá ngay bộ sưu tập độc đáo của chúng tôi hoặc liên hệ để được tư vấn miễn phí.
-    </p>
 
-        <!-- Slider Quảng Cáo -->
-        <div id="adCarousel" class="carousel slide my-4" data-bs-ride="carousel">
-            <div class="carousel-inner rounded shadow-sm">
-                <div class="carousel-item active">
-                    <img src="~/images/aocuoi7.jpg" class="d-block w-100" alt="Khuyến mãi áo cưới"
-                         style="max-height: 400px; object-fit: contain; width: 100%;" />
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                        <h5>Giảm giá 20% áo cưới cao cấp</h5>
-                        <p>Nhanh tay đặt lịch để được tư vấn và nhận ưu đãi hấp dẫn.</p>
-                        <a href="/KhuyenMai" class="btn btn-danger">Xem Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/images/aocuoi8.jpg" class="d-block w-100" alt="Dịch vụ cưới hỏi"
-                         style="max-height: 400px; object-fit: contain; width: 100%;" />
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                        <h5>Dịch vụ cưới hỏi trọn gói chuyên nghiệp</h5>
-                        <p>Giúp ngày trọng đại của bạn hoàn hảo không lo toan.</p>
-                        <a href="/DichVuCuoiHoi" class="btn btn-danger">Tìm Hiểu Thêm</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/images/aocuoi9.jpg" class="d-block w-100" alt="Chụp ảnh cưới nghệ thuật"
-                         style="max-height: 400px; object-fit: contain; width: 100%;" />
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                        <h5>Gói chụp ảnh cưới nghệ thuật</h5>
-                        <p>Ghi lại những khoảnh khắc đẹp nhất cuộc đời bạn.</p>
-                        <a href="/ChupAnhCuoi" class="btn btn-danger">Đặt Lịch Ngay</a>
-                    </div>
+
+    <div id="adCarousel" class="carousel slide my-4" data-bs-ride="carousel">
+        <div class="carousel-inner rounded shadow-sm">
+
+            <div class="carousel-item active">
+                <img src="~/images/banner1.jpg" class="d-block w-100" alt="Khuyến mãi áo cưới"
+                     style="max-height: 480px; object-fit: cover; width: 100%;" />
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-4 p-4 px-5"
+                     style="backdrop-filter: blur(5px); max-width: 500px; margin: auto;">
+                    <h5 class="fs-3 fw-semibold text-white" style="color: rgba(255,255,255,0.9);">Giảm 20% Áo Cưới Cao Cấp</h5>
+                    <p class="fs-6 text-white-50">Đặt lịch tư vấn ngay để nhận ưu đãi hấp dẫn!</p>
+                    <a asp-controller="AoCuoi" asp-action="Index" class="btn btn-sm rounded-pill px-4"
+                       style="background-color: #a29bfe; color: white; font-weight: 600;">
+                        Xem Chi Tiết
+                    </a>
+
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Trước</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Sau</span>
-            </button>
+
+            <div class="carousel-item">
+                <img src="~/images/banner2.jpg" class="d-block w-100" alt="Dịch vụ cưới hỏi"
+                     style="max-height: 480px; object-fit: cover; width: 100%;" />
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-4 p-4 px-5"
+                     style="backdrop-filter: blur(5px); max-width: 500px; margin: auto;">
+                    <h5 class="fs-3 fw-semibold text-white" style="color: rgba(255,255,255,0.9);">Cưới Hỏi Trọn Gói</h5>
+                    <p class="fs-6 text-white-50">Trọn gói - Không lo toan - Đầy đủ dịch vụ.</p>
+                    <a asp-controller="DichVuCuoiHoi" asp-action="Index"
+                       class="btn btn-sm rounded-pill px-4"
+                       style="background-color: #a29bfe; color: white; font-weight: 600;">
+                        Tìm Hiểu
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="~/images/banner3.jpg" class="d-block w-100" alt="Chụp ảnh cưới nghệ thuật"
+                     style="max-height: 480px; object-fit: cover; width: 100%;" />
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-4 p-4 px-5"
+                     style="backdrop-filter: blur(5px); max-width: 500px; margin: auto;">
+                    <h5 class="fs-3 fw-semibold text-white" style="color: rgba(255,255,255,0.9);">Chụp Ảnh Cưới Nghệ Thuật</h5>
+                    <p class="fs-6 text-white-50">Ghi lại khoảnh khắc đáng nhớ cùng người thương.</p>
+                    <a href="/ChupAnhCuoi" class="btn btn-sm rounded-pill px-4" style="background-color: #a29bfe; color: white; font-weight: 600;">Đặt Lịch</a>
+                </div>
+            </div>
+
         </div>
 
-        <a class="btn btn-primary btn-lg" asp-controller="AoCuoi" asp-action="Index" role="button">Khám Phá Áo Cưới</a>
-        <a class="btn btn-outline-secondary btn-lg ms-2" asp-controller="DichVuCuoiHoi" asp-action="Index" role="button">Dịch Vụ Cưới Hỏi</a>
+        <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Trước</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Sau</span>
+        </button>
     </div>
+
+
+
+    <a class="btn btn-primary btn-lg" asp-controller="AoCuoi" asp-action="Index" role="button">Khám Phá Áo Cưới</a>
+    <a class="btn btn-outline-secondary btn-lg ms-2" asp-controller="DichVuCuoiHoi" asp-action="Index" role="button">Dịch Vụ Cưới Hỏi</a>
 </div>
 
 
@@ -70,74 +84,58 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="~/images/aocuoi4.webp" class="card-img-top" alt="Áo Cưới 1" />
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">Áo Cưới Thiết Kế</h5>
                     <p class="card-text">Thiết kế độc quyền, sang trọng và tinh tế.</p>
-                    <a asp-controller="AoCuoi" asp-action="Details" asp-route-id="1" class="btn btn-sm btn-primary">Xem Chi Tiết</a>
+                    <a asp-controller="AoCuoi" asp-action="Index" class="btn btn-primary"
+                       style="display: inline-block; height: 45px; width: 120px; line-height: 40px; font-size: 0.9rem; padding: 0;">
+                        Xem Chi Tiết
+                    </a>
+
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="~/images/aocuoi5.webp" class="card-img-top" alt="Dịch Vụ 1" />
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">Gói Chụp Ảnh Cưới</h5>
                     <p class="card-text">Ghi lại khoảnh khắc đẹp nhất của tình yêu.</p>
-                    <a asp-controller="DichVuCuoiHoi" asp-action="Details" asp-route-id="1" class="btn btn-sm btn-primary">Xem Chi Tiết</a>
+                    <a asp-controller="DichVuCuoiHoi" asp-action="Index" class="btn btn-primary"
+                       style="display: inline-block; height: 45px; width: 120px; line-height: 40px; font-size: 0.9rem; padding: 0;">
+                        Xem Chi Tiết
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="~/images/aocuoi6.webp" class="card-img-top" alt="Áo Cưới 2" />
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">Áo Cưới Lụa Satin</h5>
                     <p class="card-text">Vẻ đẹp thanh lịch và bay bổng.</p>
-                    <a asp-controller="AoCuoi" asp-action="Details" asp-route-id="2" class="btn btn-sm btn-primary">Xem Chi Tiết</a>
+                    <a asp-controller="AoCuoi" asp-action="Details" asp-route-id="20" class="btn btn-primary">
+                        Xem Chi Tiết
+                    </a>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="text-center my-5">
-    <a class="btn btn-success btn-lg mb-4 px-5 py-3 fs-4" asp-controller="Home" asp-action="Contact">
-        <i class="fas fa-phone-alt me-2"></i> Liên Hệ Ngay
-    </a>
+<nav aria-label="Page navigation" class="d-flex justify-content-center my-5">
+    <ul class="pagination">
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" asp-controller="Home" asp-action="HomePagePart2">2</a></li>
+        <li class="page-item">
+            <a class="page-link" asp-controller="Home" asp-action="HomePagePart2" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-    <p class="mb-3 fs-5">Hoặc kết nối với chúng tôi qua mạng xã hội:</p>
-
-    <div class="d-flex justify-content-center gap-3">
-        <a href="https://www.facebook.com/yourpage" target="_blank" class="btn btn-primary">
-            <i class="fab fa-facebook-f me-1"></i> Facebook
-        </a>
-        <a href="https://www.instagram.com/yourpage" target="_blank" class="btn btn-danger">
-            <i class="fab fa-instagram me-1"></i> Instagram
-        </a>
-        <a href="https://zalo.me/yourzalo" target="_blank" class="btn btn-info text-white">
-            <i class="fas fa-comment-dots me-1"></i> Zalo
-        </a>
-    </div>
-</div>
-
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Về Chúng Tôi</h2>
-            <p>WebCUOI tự hào là địa chỉ tin cậy mang đến những chiếc áo cưới lộng lẫy nhất và dịch vụ cưới hỏi trọn gói, giúp các cặp đôi tận hưởng ngày trọng đại một cách hoàn hảo nhất.</p>
-            <p>Với đội ngũ chuyên nghiệp và tận tâm, chúng tôi cam kết mang lại sự hài lòng tuyệt đối cho quý khách.</p>
-        </div>
-        <div class="col-md-6">
-            <h2>Dịch Vụ Nổi Bật</h2>
-            <ul>
-                <li>Thiết kế và cho thuê áo cưới cao cấp</li>
-                <li>Dịch vụ trang điểm cô dâu</li>
-                <li>Chụp ảnh cưới nghệ thuật</li>
-                <li>Tổ chức tiệc cưới trọn gói</li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

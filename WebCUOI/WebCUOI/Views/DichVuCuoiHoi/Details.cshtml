@@ -3,13 +3,76 @@
 <h2>Chi tiết dịch vụ</h2>
 
 <div>
-    <img src="@Model.HinhAnhURL" width="300" />
+    <img src="@Model.HinhAnhURL" width="300" alt="@Model.TenDichVu" />
     <p><strong>Tên:</strong> @Model.TenDichVu</p>
     <p><strong>Mô tả:</strong> @Model.MoTa</p>
     <p><strong>Giá:</strong> @Model.GiaDichVu.ToString("N0") đ</p>
     <p><strong>Thời lượng:</strong> @Model.ThoiLuong</p>
     <p><strong>Khác dụng:</strong> @Model.KhacDung</p>
 </div>
+<h3>Đánh giá dịch vụ</h3>
 
-<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Sửa</a>
-<a asp-action="Index" class="btn btn-secondary">Trở về</a>
+<form method="post" asp-controller="Rating" asp-action="Create">
+    <input type="hidden" name="ServiceId" value="@Model.ID" />
+
+    <div class="mb-3">
+        <label class="form-label">Điểm đánh giá (1–5 sao):</label>
+        <input type="number" name="Score" min="1" max="5" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nhận xét của bạn:</label>
+        <textarea name="Comment" class="form-control" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+</form>
+<h4>Thêm vào Giỏ Hàng</h4>
+
+<form asp-controller="GioHang" asp-action="AddToCart" method="post">
+    <input type="hidden" name="productId" value="@Model.ID" />
+
+    <!-- ✅ Đã sửa dòng này để đảm bảo đúng giá trị "DichVuCuoiHoi" -->
+    <input type="hidden" name="productType" value="DichVuCuoiHoi" />
+
+    <div class="mb-3">
+        <label for="ngayBatDauThue" class="form-label">Ngày Thuê:</label>
+        <input type="date" name="ngayBatDauThue" id="ngayBatDauThue" class="form-control" required
+               value="@(Model.NgayBatDauThue.HasValue ? Model.NgayBatDauThue.Value.ToString("yyyy-MM-dd") : "")" />
+    </div>
+
+    <div class="mb-3">
+        <label for="ngayKetThucThue" class="form-label">Ngày Trả:</label>
+        <input type="date" name="ngayKetThucThue" id="ngayKetThucThue" class="form-control" required
+               value="@(Model.NgayKetThucThue.HasValue ? Model.NgayKetThucThue.Value.ToString("yyyy-MM-dd") : "")" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Thêm vào Giỏ Hàng</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại danh sách</a>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form[asp-action="AddToCart"]');
+            const ngayBatDauThueInput = document.getElementById('ngayBatDauThue');
+            const ngayKetThucThueInput = document.getElementById('ngayKetThucThue');
+
+            form.addEventListener('submit', function (event) {
+                const ngayBatDau = new Date(ngayBatDauThueInput.value);
+                const ngayKetThuc = new Date(ngayKetThucThueInput.value);
+
+                if (isNaN(ngayBatDau.getTime()) || isNaN(ngayKetThuc.getTime())) {
+                    alert('Vui lòng chọn Ngày Thuê và Ngày Trả hợp lệ.');
+                    event.preventDefault();
+                    return;
+                }
+
+                if (ngayBatDau > ngayKetThuc) {
+                    alert('Ngày Trả phải lớn hơn hoặc bằng Ngày Thuê.');
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+}

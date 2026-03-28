@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebCUOI.Models.Notification>
+
+@{
+    ViewData["Title"] = "Thông báo";
+}
+
+<h2 class="page-header text-center mb-4">Thông báo của bạn</h2>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Nội dung</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var n in Model)
+            {
+                <tr>
+                    <td>@n.Content</td>
+                    <td>@n.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        @if (n.IsRead)
+                        {
+                            <span class="badge bg-secondary">Đã đọc</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Chưa đọc</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!n.IsRead)
+                        {
+                            <a asp-action="MarkRead" asp-route-id="@n.Id" class="btn btn-sm btn-primary">
+                                Đánh dấu đã đọc
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">-</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-muted text-center">
+                    Bạn chưa có thông báo nào.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

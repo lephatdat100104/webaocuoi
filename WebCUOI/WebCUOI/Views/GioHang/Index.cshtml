@@ -1,75 +1,111 @@
 ﻿@model List<WebCUOI.Models.GioHangItem>
 
 @{
-    ViewData["Title"] = "Giỏ Hàng";
+    ViewData["Title"] = "Giỏ Hàng Của Bạn";
     decimal tongTien = Model.Sum(item => item.Price * item.Quantity);
 }
 
-<h2>Giỏ Hàng</h2>
+<h2 class="mt-4">Giỏ Hàng</h2>
 
-@if (TempData["Success"] != null)
+@if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">@TempData["Success"]</div>
+    <div class="alert alert-success mt-3" role="alert">@TempData["SuccessMessage"]</div>
 }
-@if (TempData["Error"] != null)
+@if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">@TempData["Error"]</div>
+    <div class="alert alert-danger mt-3" role="alert">@TempData["ErrorMessage"]</div>
 }
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info mt-3" role="alert">@TempData["InfoMessage"]</div>
+}
+
 
 @if (!Model.Any())
 {
-    <p>Giỏ hàng đang trống.</p>
+    <p class="text-center lead">Giỏ hàng của bạn đang trống. Hãy thêm sản phẩm vào giỏ để bắt đầu mua sắm nhé!</p>
+    <div class="text-center">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Tiếp tục mua sắm</a>
+    </div>
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-light">
             <tr>
                 <th>Hình ảnh</th>
                 <th>Tên sản phẩm</th>
                 <th>Loại</th>
-                <th>Ngày thuê</th>
                 <th>Kích cỡ</th>
+                <th>Ngày thuê</th>
                 <th>Giá</th>
-                <th>Thao tác</th>
+                <th class="text-center">Thao tác</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td class="align-middle" style="width: 120px;">
                         @if (!string.IsNullOrEmpty(item.ImageURL))
                         {
-                            <img src="@item.ImageURL" width="100" />
+                            <img src="@item.ImageURL" class="img-fluid rounded" alt="Hình ảnh sản phẩm" style="max-width: 100px; max-height: 100px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <span>Không có ảnh</span>
                         }
                     </td>
-                    <td>@item.ProductName</td>
-                    <td>@item.ProductType</td>
-                    <td>
+                    <td class="align-middle">@item.ProductName</td>
+                    <td class="align-middle">@item.ProductType</td>
+                    <td class="align-middle">@(string.IsNullOrEmpty(item.KichCo) ? "N/A" : item.KichCo)</td>
+                    <td class="align-middle">
                         @{
-                            var start = item.NgayBatDauThue?.ToString("dd/MM/yyyy") ?? "-";
-                            var end = item.NgayKetThucThue?.ToString("dd/MM/yyyy") ?? "-";
+                            var startDate = item.NgayBatDauThue?.ToString("dd/MM/yyyy") ?? "";
+                            var endDate = item.NgayKetThucThue?.ToString("dd/MM/yyyy") ?? "";
+                            if (item.ProductType == "AoCuoi" && item.NgayBatDauThue.HasValue && item.NgayKetThucThue.HasValue)
+                            {
+                                <span>@startDate - @endDate</span>
+                            }
+                            else if (item.ProductType == "DichVuCuoiHoi" && item.NgayBatDauThue.HasValue)
+                            {
+                                <span>@startDate</span>
+                            }
+                            else
+                            {
+                                <span>N/A</span>
+                            }
                         }
-                        @start - @end
                     </td>
-                    <td>@item.KichCo</td>
-                    <td>@item.Price.ToString("N0") đ</td>
-                    <td>
-                        <form asp-action="RemoveFromCart" method="post">
+                    <td class="align-middle text-end">@((item.Price * item.Quantity).ToString("N0")) đ</td>
+                    <td class="align-middle text-center">
+                        <form asp-action="RemoveFromCart" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?');">
                             <input type="hidden" name="id" value="@item.ID" />
-                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Xóa</button>
                         </form>
                     </td>
                 </tr>
             }
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-end fw-bold">Tổng tiền các sản phẩm:</td>
+                <td class="text-end fw-bold">@tongTien.ToString("N0") đ</td>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
 
-    <div class="text-end">
-        <h4>Tổng tiền: <strong>@tongTien.ToString("N0") đ</strong></h4>
-        <form asp-action="Checkout" method="post">
-            <button class="btn btn-success">Thanh toán</button>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
+        </a>
+
+        @* Nút này sẽ POST đến action Checkout (GET) để hiển thị trang xác nhận/thanh toán *@
+        <form asp-action="Checkout" asp-controller="GioHang" method="get">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-credit-card"></i> Tiến hành thanh toán
+            </button>
         </form>
     </div>
 }

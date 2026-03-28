@@ -1,4 +1,14 @@
-﻿@* Views/Shared/_Layout.cshtml *@
+﻿@using Newtonsoft.Json
+@{
+    Layout = null;
+
+    var gioHangJson = Context.Session.GetString("GioHang");
+    var gioHang = !string.IsNullOrEmpty(gioHangJson)
+        ? JsonConvert.DeserializeObject<List<WebCUOI.Models.GioHangItem>>(gioHangJson)
+        : new List<WebCUOI.Models.GioHangItem>();
+    var totalQuantity = gioHang.Sum(item => item.Quantity);
+}
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -6,22 +16,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - WebCUOI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;400;700&display=swap" />
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebCUOI.styles.css" asp-append-version="true" />
 
     <style>
-        /* Background hình nền mờ nhẹ */
+        /* Các style hiện tại của bạn đã rất tốt, giữ nguyên */
         body {
             font-family: 'Roboto', sans-serif;
             background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
             background-size: cover;
             position: relative;
             min-height: 100vh;
-            padding-top: 70px; /* Để không bị menu che */
+            padding-top: 70px; /* Để nội dung không bị che bởi navbar fixed-top */
         }
 
-            /* Overlay mờ tối để chữ nổi bật */
             body::before {
                 content: "";
                 position: fixed;
@@ -29,15 +40,15 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(255, 240, 245, 0.75); /* màu hồng nhạt mờ */
+                background: rgba(255, 240, 245, 0.75); /* Lớp phủ màu hồng nhạt */
                 z-index: -1;
-                backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px); /* Hiệu ứng làm mờ nền */
             }
 
         .navbar-brand {
             font-family: 'Great Vibes', cursive;
             font-size: 2rem;
-            color: #ad1457 !important; /* tím hồng đậm */
+            color: #ad1457 !important;
             font-weight: 700;
             letter-spacing: 1.5px;
         }
@@ -86,7 +97,6 @@
                 text-decoration: none;
             }
 
-        /* Scrollbar custom nhẹ nhàng */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -100,41 +110,255 @@
             border-radius: 4px;
         }
 
-        /* Container chính - làm nền trắng mờ cho nội dung dễ đọc */
         .container.mt-4 {
             background-color: rgba(255, 255, 255, 0.95);
             padding: 25px 30px;
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(173, 20, 87, 0.15);
-            min-height: 80vh;
+            min-height: 80vh; /* Đảm bảo container chính có chiều cao tối thiểu */
         }
+
+        .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(173, 20, 87, 0.3);
+            min-width: 320px;
+        }
+
+            .dropdown-menu .cart-item img {
+                border-radius: 6px;
+            }
+
+        #cartCountBadge {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+        }
+
+        /* Thêm một số style cho các tiêu đề chính trong các trang View */
+        .page-header {
+            font-family: 'Great Vibes', cursive;
+            color: #ad1457;
+            font-size: 3rem; /* Tăng kích thước font cho tiêu đề chính */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Style cho các card trong trang quản lý hoặc danh sách */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .table thead {
+            background-color: #f8e1eb; /* Màu nền cho header bảng */
+            color: #ad1457;
+            font-weight: 600;
+        }
+
+        .table tbody tr:hover {
+            background-color: #fff0f5; /* Hiệu ứng hover cho dòng bảng */
+        }
+
+        .btn-info, .btn-primary, .btn-success, .btn-danger, .btn-warning, .btn-secondary {
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+            font-weight: 500;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+            .btn-info:hover {
+                background-color: #117a8b;
+                border-color: #117a8b;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-success:hover {
+                background-color: #1e7e34;
+                border-color: #1e7e34;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #bd2130;
+                border-color: #bd2130;
+            }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
+            /* Thêm color cho chữ để dễ nhìn */
+            .btn-warning:hover {
+                background-color: #e0a800;
+                border-color: #e0a800;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #545b62;
+                border-color: #545b62;
+            }
+
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCUOI</a>
+            <div class="container d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand me-4" asp-area="" asp-controller="Home" asp-action="Index">WebCUOI</a>
+
+                    <div class="dropdown">
+                        <a class="nav-link position-relative" href="@Url.Action("Index", "GioHang")" id="gioHangDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.5rem; color: #ad1457;">
+                            <i class="bi bi-cart-fill"></i>
+                            @if (totalQuantity > 0)
+                            {
+                                <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="cartCountBadge">@totalQuantity</span>
+                            }
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="gioHangDropdown" style="max-height: 400px; overflow-y: auto;">
+                            <li><h6 class="dropdown-header">Giỏ hàng của bạn</h6></li>
+                            <li><hr class="dropdown-divider" /></li>
+
+                            @if (gioHang.Count == 0)
+                            {
+                                <li><p class="text-muted">Chưa có sản phẩm nào.</p></li>
+                            }
+                            else
+                            {
+                                @foreach (var item in gioHang)
+                                {
+                                    <li class="d-flex align-items-center mb-2 cart-item">
+                                        <img src="@(!string.IsNullOrEmpty(item.ImageURL) ? item.ImageURL : Url.Content("~/images/no-image.png"))" alt="@item.ProductName" width="45" height="45" class="me-2" />
+                                        <div>
+                                            <div class="fw-semibold">@item.ProductName</div>
+                                            <small>@item.ProductType - @item.Quantity x @item.Price.ToString("N0") đ</small>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            <li><hr class="dropdown-divider" /></li>
+                            <li class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Index", "GioHang")">Xem giỏ hàng</a>
+                                <a class="btn btn-sm btn-success ms-2" href="@Url.Action("Checkout", "GioHang")" style="color: white;">Thanh toán</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door-fill me-1"></i> Trang Chủ</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="AoCuoi" asp-action="Index"><i class="bi bi-person-hearts me-1"></i> Áo Cưới</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="DichVuCuoiHoi" asp-action="Index"><i class="bi bi-flower1 me-1"></i> Dịch Vụ Cưới Hỏi</a></li>
+
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Trang Chủ</a>
+                            <a class="nav-link" href="@Url.Action("ThongKe", "GioHang")">
+                                <i class="bi bi-bar-chart-fill me-1"></i> Thống Kê
+                            </a>
                         </li>
+                        @* Đã bỏ Lịch sử mua hàng riêng biệt vì nó đã được di chuyển vào _LoginPartial *@
+                        @* @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="GioHang" asp-action="LichSuMuaHang">
+                                    <i class="bi bi-clock-history me-1"></i> Lịch sử mua hàng
+                                </a>
+                            </li>
+                        } *@
+
+                        @* Thêm phần phân quyền cho Admin tại đây *@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-fill-gear me-1"></i> Quản Lý Admin
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyNguoiDung"><i class="bi bi-people-fill me-2"></i>Quản lý Người dùng</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyDichVu"><i class="bi bi-gem me-2"></i>Quản lý Dịch Vụ</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyAoCuoi"><i class="bi bi-bag-heart-fill me-2"></i>Quản lý Áo cưới</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyDonHang"><i class="bi bi-receipt-cutoff me-2"></i>Quản lý Đơn Hàng</a></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyPhanHoi">
+                                            <i class="bi bi-chat-dots-fill me-2"></i> Quản lý phản hồi
+                                        </a>
+                                    </li>
+
+
+
+
+                                    @* Thêm các link quản lý khác nếu có *@
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item"><a class="nav-link" asp-controller="Rating" asp-action="Index"><i class="bi bi-star-fill me-1"></i> Đánh giá</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Feedback" asp-action="Index"><i class="bi bi-chat-dots-fill me-1"></i> Phản hồi</a></li>
+
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About"><i class="bi bi-info-circle-fill me-1"></i> Giới Thiệu</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="AoCuoi" asp-action="Index">Áo Cưới</a>
+                            <a class="nav-link" asp-controller="Rating" asp-action="PhanHoiCuaToi">
+                                <i class="bi bi-chat-dots me-1"></i> Phản hồi của tôi
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="DichVuCuoiHoi" asp-action="Index">Dịch Vụ Cưới Hỏi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="About">Giới Thiệu</a>
-                        </li>
+
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown me-2">
+                            <a class="nav-link position-relative" href="#" id="notiDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                               style="font-size: 1.5rem; color: #ad1457;">
+                                <i class="bi bi-bell-fill"></i>
+                                <span id="notiBadge"
+                                      class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
+                                      style="display:none;">0</span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end p-0"
+                                aria-labelledby="notiDropdown"
+                                style="width: 300px; max-height: 400px; overflow-y: auto;">
+                                <div id="notiList"></div>
+                            </ul>
+                        </li>
+                    }
+
+
                     <partial name="_LoginPartial" />
                 </div>
+
             </div>
         </nav>
     </header>
@@ -153,6 +377,46 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @* Đảm bảo đã có link Font Awesome nếu bạn muốn hiển thị icons. Bạn có thể sử dụng script này hoặc link CSS từ kit của bạn. *@
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/684ef18489985e190d8c7772/1itq5urq2';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        @if (User.Identity.IsAuthenticated)
+        {
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Lấy danh sách 5 thông báo gần nhất
+                        fetch('/Notification/GetRecent')
+                            .then(res => res.text())
+                            .then(html => {
+                                const listDiv = document.getElementById('notiList');
+                                if (listDiv) listDiv.innerHTML = html;
+                            });
+
+                        // Khi click chuông → đánh dấu đã đọc
+                        const notiDropdown = document.getElementById('notiDropdown');
+                        if (notiDropdown) {
+                            notiDropdown.addEventListener('click', () => {
+                                fetch('/Notification/MarkAllRead', { method: 'POST' });
+                            });
+                        }
+                    });
+        </script>
+        }
+
+    </script>
+
+    <!--End of Tawk.to Script-->
 </body>
+
 </html>

@@ -1,17 +1,19 @@
 ﻿@model IEnumerable<WebCUOI.Models.AoCuoi>
-
 @{
-    ViewData["Title"] = "Danh Sách Áo Cưới";
+    ViewData["Title"] = "Album Áo Cưới";
 }
 
-<h1 class="mb-4 text-center text-primary fw-bold" style="font-family: 'Playfair Display', serif;">
-    Danh Sách Áo Cưới
+<h1 class="text-center text-primary fw-bold mb-4" style="font-family: 'Playfair Display', serif;">
+    💍 Album Áo Cưới
 </h1>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <a asp-action="Create" class="btn btn-success shadow-sm">
-        <i class="fas fa-plus me-2"></i> Thêm Mới Áo Cưới
-    </a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus me-2"></i> Thêm Mới Áo Cưới
+        </a>
+    }
 
     <div class="input-group w-25">
         <span class="input-group-text bg-white"><i class="fas fa-search"></i></span>
@@ -19,61 +21,56 @@
     </div>
 </div>
 
-<table class="table table-hover align-middle shadow-sm rounded">
-    <thead class="table-dark text-white">
-        <tr>
-            <th>Ảnh</th>
-            <th>@Html.DisplayNameFor(model => model.TenAoCuoi)</th>
-            <th>@Html.DisplayNameFor(model => model.GiaThue)</th>
-            <th>@Html.DisplayNameFor(model => model.KichCo)</th>
-            <th>@Html.DisplayNameFor(model => model.TinhTrang)</th>
-            <th>@Html.DisplayNameFor(model => model.NgayNhapKho)</th>
-            <th class="text-center">Hành Động</th>
-        </tr>
-    </thead>
-    <tbody id="tableBody">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td style="width: 110px;">
-                    @if (!string.IsNullOrEmpty(item.HinhAnhURL))
-                    {
-                        <img src="@item.HinhAnhURL" alt="@item.TenAoCuoi" class="img-thumbnail" style="max-width: 100px; max-height: 100px; object-fit: cover;" />
-                    }
-                    else
-                    {
-                        <span class="text-muted">Không có ảnh</span>
-                    }
-                </td>
-                <td class="fw-semibold">@item.TenAoCuoi</td>
-                <td>@item.GiaThue.ToString("C0")</td>
-                <td>@item.KichCo</td>
-                <td>
-                    @if (item.TinhTrang == "Còn hàng")
-                    {
-                        <span class="badge bg-success">@item.TinhTrang</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">@item.TinhTrang</span>
-                    }
-                </td>
-                <td>@item.NgayNhapKho.ToString("dd/MM/yyyy")</td>
-                <td class="text-center" style="width: 240px;">
-                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-warning me-1" title="Sửa">
-                        <i class="fas fa-edit me-1"></i> Sửa
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-info me-1" title="Chi Tiết">
-                        <i class="fas fa-info-circle me-1"></i> Chi Tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger" title="Xóa" onclick="return confirm('Bạn có chắc muốn xóa áo cưới này không?');">
-                        <i class="fas fa-trash-alt me-1"></i> Xóa
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row g-4" id="albumContainer">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-lg-3 col-sm-6 aoCuoiCard">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="position-relative">
+                    <img src="@(!string.IsNullOrEmpty(item.HinhAnhURL) ? item.HinhAnhURL : Url.Content("~/images/no-image.png"))"
+                         class="card-img-top"
+                         alt="@item.TenAoCuoi"
+                         style="height:280px; object-fit:cover; border-top-left-radius:10px; border-top-right-radius:10px;" />
+                </div>
+
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">@item.TenAoCuoi</h5>
+                    <p class="card-text text-danger fw-semibold mb-1">
+                        @item.GiaThue.ToString("N0") đ
+                    </p>
+                    <p class="text-muted small mb-3">
+                        Kích cỡ: @item.KichCo
+                    </p>
+
+                    <div class="d-flex justify-content-center flex-wrap gap-1">
+                        <!-- Nút gộp: Xem / Thuê -->
+                        <a asp-action="Details"
+                           asp-route-id="@item.ID"
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-eye me-1"></i> Thuê ngay
+                        </a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit"
+                               asp-route-id="@item.ID"
+                               class="btn btn-outline-warning btn-sm">
+                                <i class="fas fa-edit me-1"></i> Sửa
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.ID"
+                               class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Bạn có chắc muốn xóa áo cưới này không?');">
+                                <i class="fas fa-trash-alt me-1"></i> Xóa
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -81,16 +78,14 @@
     <script>
         // Tìm kiếm theo tên áo cưới
         const searchInput = document.getElementById('searchInput');
-        const tableBody = document.getElementById('tableBody');
+        const cards = document.querySelectorAll('.aoCuoiCard');
 
         searchInput.addEventListener('keyup', function () {
             const filter = this.value.toLowerCase();
-            const rows = tableBody.getElementsByTagName('tr');
-
-            for (let row of rows) {
-                const tenAoCuoi = row.cells[1].textContent.toLowerCase();
-                row.style.display = tenAoCuoi.includes(filter) ? '' : 'none';
-            }
+            cards.forEach(card => {
+                const name = card.querySelector('.card-title').textContent.toLowerCase();
+                card.style.display = name.includes(filter) ? '' : 'none';
+            });
         });
     </script>
 }

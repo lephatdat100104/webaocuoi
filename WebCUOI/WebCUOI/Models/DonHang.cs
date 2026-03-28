@@ -1,37 +1,58 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema; // Để dùng [ForeignKey]
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebCUOI.Models // Thay YourProjectName bằng tên namespace của dự án bạn
+namespace WebCUOI.Models
 {
     public class DonHang
     {
+        [Key] // ✅ Khóa chính
         public int ID { get; set; }
 
-        [Display(Name = "Ngày đặt")]
-        [DataType(DataType.Date)]
+        // 🔑 Khóa ngoại tới KhachHang
+        public int KhachHangID { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime NgayDat { get; set; } = DateTime.Now;
 
-        [Display(Name = "Ngày thuê/sử dụng")]
-        [DataType(DataType.Date)]
-        public DateTime NgaySuDung { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal TongTien { get; set; }
 
-        [Display(Name = "Ngày trả (nếu có)")]
-        [DataType(DataType.Date)]
-        public DateTime? NgayTra { get; set; } // Nullable nếu là dịch vụ không có ngày trả
+        [StringLength(50)]
+        public string TrangThai { get; set; } = "Chờ Thanh Toán";
 
-        [Display(Name = "Tổng tiền")]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(18, 2)")] // Định dạng chính xác trong DB
-        public decimal TongTien { get; set; } = 0; // Mặc định 0
+        // === 💵 Phương thức thanh toán (VNPay hoặc Tiền mặt) ===
+        [StringLength(50)]
+        public string PhuongThucThanhToan { get; set; } = "VNPay"; // hoặc "TienMat"
 
-        [Display(Name = "Trạng thái đơn hàng")]
+        // === 🏦 Thông tin thanh toán VNPAY ===
         [StringLength(100)]
-        public string TrangThai { get; set; } = "Chờ xử lý"; // Ví dụ: Chờ xử lý, Đã xác nhận, Đã hoàn thành, Đã hủy
+        public string? VnpayTxnRef { get; set; } // Mã giao dịch do hệ thống sinh ra
 
-        // Khóa ngoại tới KhachHang
-        [Display(Name = "Khách hàng")]
-        public int KhachHangID { get; set; }
+        [StringLength(100)]
+        public string? VnpayTransactionNo { get; set; } // Mã giao dịch tại VNPAY
+
+        [DataType(DataType.DateTime)]
+        public DateTime? PaymentDate { get; set; } // Thời điểm thanh toán thành công
+
+        // === 🚚 Thông tin giao hàng / liên hệ ===
+        [StringLength(255)]
+        public string? ShippingAddress { get; set; } // Địa chỉ giao hàng
+
+        [StringLength(20)]
+        public string? PhoneNumber { get; set; } // Số điện thoại liên hệ
+
+        [StringLength(500)]
+        public string? Notes { get; set; } // Ghi chú của khách hàng
+
+        public DateTime? NgaySuDung { get; set; }
+
+        // === 🔗 Quan hệ với Khách hàng ===
         [ForeignKey("KhachHangID")]
-        public KhachHang KhachHang { get; set; } // Navigation property
+        public virtual KhachHang? KhachHang { get; set; } // ✅ Cho phép null (để tránh lỗi 400)
+
+        // === 📦 Danh sách chi tiết đơn hàng ===
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } = new List<ChiTietDonHang>();
     }
 }

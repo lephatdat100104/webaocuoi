@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebCUOI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5222a45a49c8318f9b5be7526135488a610c310b")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebCUOI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebCUOI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

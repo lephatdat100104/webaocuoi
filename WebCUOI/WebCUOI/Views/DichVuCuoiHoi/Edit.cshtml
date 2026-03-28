@@ -1,65 +1,70 @@
 ﻿@model WebCUOI.Models.DichVuCuoiHoi
 
 @{
-    ViewData["Title"] = "Chỉnh sửa dịch vụ cưới hỏi";
+    ViewData["Title"] = "Chỉnh sửa dịch vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center mb-4">Chỉnh sửa Dịch Vụ Cưới Hỏi</h2>
+<h1>Chỉnh sửa dịch vụ cưới hỏi</h1>
+<hr />
 
-<form asp-action="Edit" enctype="multipart/form-data" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ID" />
-    <input type="hidden" asp-for="HinhAnhURL" /> @* Giữ lại đường dẫn ảnh cũ khi không upload ảnh mới *@
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
 
-    <div class="form-group mb-3">
-        <label asp-for="TenDichVu" class="form-label"></label>
-        <input asp-for="TenDichVu" class="form-control" />
-        <span asp-validation-for="TenDichVu" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+
+            <div class="form-group">
+                <label asp-for="TenDichVu" class="control-label"></label>
+                <input asp-for="TenDichVu" class="form-control" />
+                <span asp-validation-for="TenDichVu" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <textarea asp-for="MoTa" class="form-control"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GiaDichVu" class="control-label"></label>
+                <input asp-for="GiaDichVu" class="form-control" />
+                <span asp-validation-for="GiaDichVu" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ThoiLuong" class="control-label"></label>
+                <input asp-for="ThoiLuong" class="form-control" />
+                <span asp-validation-for="ThoiLuong" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="KhacDung" />
+                <label class="form-check-label" asp-for="KhacDung"></label>
+            </div>
+
+            <div class="form-group">
+                <label>Ảnh hiện tại</label><br />
+                @if (!string.IsNullOrEmpty(Model.HinhAnhURL))
+                {
+                        <img src="@Model.HinhAnhURL" alt="Ảnh dịch vụ" width="200" class="img-thumbnail mb-2" />
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Chọn ảnh mới (nếu muốn thay)</label>
+                <input type="file" name="ImageFile" class="form-control-file" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2">Quay lại</a>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group mb-3">
-        <label asp-for="MoTa" class="form-label"></label>
-        <textarea asp-for="MoTa" class="form-control"></textarea>
-        <span asp-validation-for="MoTa" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3">
-        <label asp-for="GiaDichVu" class="form-label"></label>
-        <input asp-for="GiaDichVu" class="form-control" />
-        <span asp-validation-for="GiaDichVu" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3">
-        <label asp-for="ThoiLuong" class="form-label"></label>
-        <input asp-for="ThoiLuong" class="form-control" />
-        <span asp-validation-for="ThoiLuong" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3 form-check">
-        <input asp-for="KhacDung" class="form-check-input" />
-        <label asp-for="KhacDung" class="form-check-label"></label>
-    </div>
-
-    <div class="form-group mb-3">
-        <label class="form-label">Ảnh hiện tại</label><br />
-        @if (!string.IsNullOrEmpty(Model.HinhAnhURL))
-        {
-            <img src="@Model.HinhAnhURL" alt="Ảnh dịch vụ" style="max-height: 150px;" class="mb-2" />
-        }
-        else
-        {
-            <p class="text-muted">Chưa có ảnh</p>
-        }
-    </div>
-
-    <div class="form-group mb-3">
-        <label class="form-label">Tải ảnh mới</label>
-        <input type="file" name="ImageFile" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
-</form>
+</div>
 
 @section Scripts {
     @{

@@ -87,7 +87,7 @@ namespace WebCUOI.Controllers // Thay WebCUOI bằng tên dự án của bạn
         // POST: AoCuoi/Edit/5 (Xử lý khi submit form chỉnh sửa)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,TenAoCuoi,MoTa,GiaThue,KichCo,TinhTrang,HinhAnhURL,NgayNhapKho")] AoCuoi aoCuoi)
+        public async Task<IActionResult> Edit(int id, AoCuoi aoCuoi, IFormFile ImageFile)
         {
             if (id != aoCuoi.ID)
             {
@@ -98,8 +98,27 @@ namespace WebCUOI.Controllers // Thay WebCUOI bằng tên dự án của bạn
             {
                 try
                 {
-                    _context.Update(aoCuoi); // Cập nhật vào bộ nhớ đệm
-                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    // Nếu có ảnh mới
+                    if (ImageFile != null && ImageFile.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/aocuoi", fileName);
+
+                        // Tạo thư mục nếu chưa tồn tại
+                        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await ImageFile.CopyToAsync(stream);
+                        }
+
+                        // Gán đường dẫn ảnh mới
+                        aoCuoi.HinhAnhURL = "/images/aocuoi/" + fileName;
+                    }
+
+                    _context.Update(aoCuoi);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -112,8 +131,8 @@ namespace WebCUOI.Controllers // Thay WebCUOI bằng tên dự án của bạn
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
             return View(aoCuoi);
         }
 

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebCUOI.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Phản hồi của tôi";
+}
+
+<h2 class="page-header text-center mb-4">Phản hồi của tôi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nội dung</th>
+            <th>Phản hồi của admin</th>
+            <th>Thời gian</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Message</td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Reply))
+                        {
+                            <span class="text-muted">Admin chưa phản hồi</span>
+                        }
+                        else
+                        {
+                            <div>@item.Reply</div>
+                            <small class="text-muted">
+                                @item.RepliedAt?.ToString("dd/MM/yyyy HH:mm")
+                            </small>
+                        }
+                    </td>
+                    <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center text-muted">
+                    Bạn chưa gửi phản hồi nào.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

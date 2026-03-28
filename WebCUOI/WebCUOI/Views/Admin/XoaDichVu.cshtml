@@ -1,0 +1,28 @@
+﻿@model WebCUOI.Models.DichVuCuoiHoi
+
+@{
+    ViewData["Title"] = "Xóa Dịch Vụ";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Bạn có chắc chắn muốn xóa dịch vụ này không?</h4>
+
+<div>
+    <strong>Tên dịch vụ:</strong> @Model.TenDichVu<br />
+    <strong>Giá:</strong> @Model.GiaDichVu.ToString("N0") VNĐ<br />
+    <strong>Thời lượng:</strong> @Model.ThoiLuong<br />
+    @if (!string.IsNullOrEmpty(Model.HinhAnhURL))
+    {
+        <div class="mt-2">
+            <img src="@Model.HinhAnhURL" alt="Ảnh dịch vụ" width="200" />
+        </div>
+    }
+</div>
+
+<form asp-action="XoaDichVu" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ID" />
+    <button type="submit" class="btn btn-danger mt-3">Xác nhận xóa</button>
+    <a asp-action="QuanLyDichVu" class="btn btn-secondary mt-3">Hủy</a>
+</form>

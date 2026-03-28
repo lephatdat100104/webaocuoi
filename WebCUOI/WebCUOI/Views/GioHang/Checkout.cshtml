@@ -1,0 +1,119 @@
+﻿@model List<WebCUOI.Models.GioHangItem>
+
+@{
+    ViewData["Title"] = "Xác Nhận Đơn Hàng";
+    decimal tongTien = Model.Sum(item => item.Price * item.Quantity);
+}
+
+<h2 class="mt-4">Xác Nhận Đơn Hàng và Thanh Toán</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-3" role="alert">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">@TempData["ErrorMessage"]</div>
+}
+
+@if (!Model.Any())
+{
+    <p class="text-center lead">Giỏ hàng trống, không thể tiến hành thanh toán.</p>
+    <div class="text-center">
+        <a asp-controller="GioHang" asp-action="Index" class="btn btn-info mt-3">Quay lại Giỏ hàng</a>
+    </div>
+}
+else
+{
+    <div class="card shadow-sm mt-3">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Chi tiết các sản phẩm trong đơn hàng</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Loại</th>
+                        <th>Kích cỡ</th>
+                        <th>Ngày thuê</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.ProductType</td>
+                            <td>@(string.IsNullOrEmpty(item.KichCo) ? "N/A" : item.KichCo)</td>
+                            <td>
+                                @{
+                                    var startDate = item.NgayBatDauThue?.ToString("dd/MM/yyyy") ?? "";
+                                    var endDate = item.NgayKetThucThue?.ToString("dd/MM/yyyy") ?? "";
+                                    if (item.ProductType == "AoCuoi" && item.NgayBatDauThue.HasValue && item.NgayKetThucThue.HasValue)
+                                    {
+                                        <span>@startDate - @endDate</span>
+                                        ;
+                                    }
+                                    else if (item.ProductType == "DichVuCuoiHoi" && item.NgayBatDauThue.HasValue)
+                                    {
+                                        <span>@startDate</span>
+                                        ;
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                        ;
+                                    }
+                                }
+                            </td>
+                            <td class="text-end">@((item.Price * item.Quantity).ToString("N0")) đ</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-end fw-bold">Tổng tiền phải trả:</td>
+                        <td class="text-end fw-bold">@tongTien.ToString("N0") đ</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Thông tin khách hàng</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Email:</strong> @User.Identity.Name</p>
+            <p><i>(Các thông tin khác như Tên, Địa chỉ, SĐT sẽ được lấy từ dữ liệu KhachHang liên kết với tài khoản đăng nhập)</i></p>
+            <p><i>Nếu thông tin chưa chính xác, vui lòng cập nhật hồ sơ cá nhân trước khi thanh toán.</i></p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a asp-controller="GioHang" asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại giỏ hàng
+        </a>
+
+        <div class="d-flex gap-3">
+            <!-- Nút thanh toán tiền mặt -->
+            <form asp-action="CreateCODOrder" asp-controller="GioHang" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-warning btn-lg">
+                    <i class="bi bi-cash-coin"></i> Thanh toán tiền mặt
+                </button>
+            </form>
+
+            <!-- Nút thanh toán qua VNPAY -->
+            <form asp-action="CreateVnpayPayment" asp-controller="GioHang" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="bi bi-wallet-fill"></i> Thanh toán qua VNPAY
+                </button>
+            </form>
+        </div>
+    </div>
+}

@@ -17,7 +17,7 @@ namespace WebCUOI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.16")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -281,17 +281,34 @@ namespace WebCUOI.Migrations
                     b.Property<int?>("DichVuCuoiHoiID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DonGia")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.Property<int>("DonHangID")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Gia")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("KichCo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LoaiSanPham")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("NgayBatDauThue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayKetThucThue")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ThanhTien")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<string>("TenSanPham")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("ID");
 
@@ -316,16 +333,24 @@ namespace WebCUOI.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("HinhAnhURL")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("KhacDung")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LoaiSanPham")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MoTa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayBatDauThue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayKetThucThue")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TenDichVu")
                         .IsRequired()
@@ -333,7 +358,6 @@ namespace WebCUOI.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ThoiLuong")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -356,17 +380,43 @@ namespace WebCUOI.Migrations
                     b.Property<DateTime>("NgayDat")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("NgaySuDung")
+                    b.Property<DateTime?>("NgaySuDung")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("NgayTra")
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PhuongThucThanhToan")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ShippingAddress")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<decimal>("TongTien")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("TrangThai")
                         .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("VnpayTransactionNo")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("VnpayTxnRef")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -375,6 +425,37 @@ namespace WebCUOI.Migrations
                     b.HasIndex("KhachHangID");
 
                     b.ToTable("DonHang");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.Feedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RepliedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reply")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("WebCUOI.Models.KhachHang", b =>
@@ -403,9 +484,78 @@ namespace WebCUOI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ID");
 
+                    b.HasIndex("UserID");
+
                     b.ToTable("KhachHang");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdminReply")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReplyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -470,7 +620,7 @@ namespace WebCUOI.Migrations
                         .HasForeignKey("DichVuCuoiHoiID");
 
                     b.HasOne("WebCUOI.Models.DonHang", "DonHang")
-                        .WithMany()
+                        .WithMany("ChiTietDonHangs")
                         .HasForeignKey("DonHangID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -491,6 +641,38 @@ namespace WebCUOI.Migrations
                         .IsRequired();
 
                     b.Navigation("KhachHang");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.Feedback", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.KhachHang", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.Rating", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebCUOI.Models.DonHang", b =>
+                {
+                    b.Navigation("ChiTietDonHangs");
                 });
 #pragma warning restore 612, 618
         }

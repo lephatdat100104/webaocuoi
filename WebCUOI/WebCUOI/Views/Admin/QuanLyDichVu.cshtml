@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebCUOI.Models.DichVuCuoiHoi>
+
+@{
+    ViewData["Title"] = "Quản Lý Dịch Vụ Cưới Hỏi";
+}
+
+<h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="TaoDichVu" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Thêm Dịch Vụ Mới</a>
+</p>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="bg-info text-white">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenDichVu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GiaDichVu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiLuong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KhacDung)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HinhAnhURL)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenDichVu)
+                    </td>
+                    <td>
+                        @item.GiaDichVu.ToString("N0") VNĐ
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiLuong)
+                    </td>
+                    <td>
+                        @if (item.KhacDung)
+                        {
+                            <span class="badge bg-success">Có</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Không</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.HinhAnhURL))
+                        {
+                            <img src="@item.HinhAnhURL" alt="@item.TenDichVu" width="80" height="80" style="object-fit: cover; border-radius: 5px;" />
+                        }
+                        else
+                        {
+                            <span>Không ảnh</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="SuaDichVu" asp-route-id="@item.ID" class="btn btn-sm btn-warning mb-1"><i class="bi bi-pencil-fill"></i> Sửa</a> |
+                        <a asp-action="XoaDichVu" asp-route-id="@item.ID" class="btn btn-sm btn-danger mb-1"><i class="bi bi-trash-fill"></i> Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

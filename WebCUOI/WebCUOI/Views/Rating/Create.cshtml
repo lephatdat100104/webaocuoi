@@ -1,0 +1,16 @@
+﻿@model WebCUOI.Models.Rating
+
+<h2>Đánh giá dịch vụ</h2>
+
+<form method="post" asp-action="Create">
+    <input type="hidden" name="ServiceId" value="@Model.ServiceId" />
+    <div class="form-group">
+        <label>Điểm (1-5 sao):</label>
+        <input type="number" name="Score" min="1" max="5" class="form-control" required />
+    </div>
+    <div class="form-group mt-2">
+        <label>Bình luận:</label>
+        <textarea name="Comment" class="form-control" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Gửi đánh giá</button>
+</form>
